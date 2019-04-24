@@ -1,31 +1,39 @@
 <template>
-  <div class="mainList">
-    <nav>
-      <span>全部</span>
-      <span>精华</span>
-      <span>分享</span>
-      <span>问答</span>
-      <span>招聘</span>
-    </nav>
-    <ol>
-      <li v-for="value in posts">
-        <div class="left-wrapper">
-          <img :src="value.author.avatar_url" alt="avatar">
-          <span class="count">{{value.reply_count}}/<span class="visit">{{value.visit_count}}</span>  </span>
+  <div>
+    <div class="mainList">
+      <nav>
+        <span>全部</span>
+        <span>精华</span>
+        <span>分享</span>
+        <span>问答</span>
+        <span>招聘</span>
+      </nav>
+      <ol>
+        <li v-for="value in posts">
+          <div class="left-wrapper">
+            <img :src="value.author.avatar_url" alt="avatar">
+            <span class="count">{{value.reply_count}}/<span class="visit">{{value.visit_count}}</span>  </span>
+            <span class="tab top" v-if="value.top===true">置顶</span>
+            <span class="tab" v-if="!value.top===true && value.good===true">精华</span>
+            <span class="tab" v-if="!value.top===true && value.tab==='share'">分享</span>
+            <span class="tab" v-if="!value.top===true && value.tab==='ask'">问答</span>
+            <span class="tab" v-if="!value.top===true && value.tab==='job'">招聘</span>
 
-          <span class="tab top" v-if="value.top===true">置顶</span>
-          <span class="tab" v-if="!value.top===true && value.good===true">精华</span>
-          <span class="tab" v-if="!value.top===true && value.tab==='share'">分享</span>
-          <span class="tab" v-if="!value.top===true && value.tab==='ask'">问答</span>
-          <span class="tab" v-if="!value.top===true && value.tab==='job'">招聘</span>
-
-          <span class="title">{{value.title}}</span>
-        </div>
-        <div class="right-wrapper">
-          <span class="replyTime">{{value.last_reply_at|formatDate}}</span>
-        </div>
-      </li>
-    </ol>
+            <span class="title">{{value.title}}</span>
+          </div>
+          <div class="right-wrapper">
+            <span class="replyTime">{{value.last_reply_at|formatDate}}</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="loading" v-if="isLoading===true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -34,7 +42,8 @@
     name: "Mainlist",
     data: function () {
       return {
-        posts: []
+        posts: [],
+        isLoading:true
       }
     },
     methods: {
@@ -42,7 +51,7 @@
         this.$axios.get('https://cnodejs.org/api/v1/topics/?limit=30&page=1')
           .then((response) => {
               this.posts = response.data.data
-              console.log(this.posts);
+              this.isLoading=false
             }
           )
       }
@@ -60,9 +69,10 @@
 <style scoped>
   .mainList {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 10px auto;
     background: #ffffff;
     padding: 10px;
+
   }
 
   nav span {
@@ -140,5 +150,41 @@
     cursor: pointer;
   }
 
-
+  .loading{
+    width: 80px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top:15px;
+  }
+  .loading span{
+    display: inline-block;
+    width: 8px;
+    height: 100%;
+    border-radius: 4px;
+    background: lightgreen;
+    -webkit-animation: load 1s ease infinite;
+  }
+  @-webkit-keyframes load{
+    0%,100%{
+      height: 40px;
+      background: lightgreen;
+    }
+    50%{
+      height: 70px;
+      margin: -15px 0;
+      background: lightblue;
+    }
+  }
+  .loading span:nth-child(2){
+    -webkit-animation-delay:0.2s;
+  }
+  .loading span:nth-child(3){
+    -webkit-animation-delay:0.4s;
+  }
+  .loading span:nth-child(4){
+    -webkit-animation-delay:0.6s;
+  }
+  .loading span:nth-child(5){
+    -webkit-animation-delay:0.8s;
+  }
 </style>

@@ -1,19 +1,23 @@
 <template>
   <div id="app">
     <Top/>
-    <MainList/>
+    <!--<MainList/>-->
+    <Article/>
+    <Footer/>
   </div>
 </template>
 
 <script>
   import Top from './components/Top'
   import MainList from './components/MainList'
+  import Article from './components/Article'
+  import Footer from './components/Footer2'
 
 
   export default {
     name: 'App',
     components: {
-      Top, MainList
+      Top, MainList,Article,Footer
     }
   }
 </script>

@@ -9,14 +9,7 @@ Vue.prototype.$axios=axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
-})
-
-
+//全局过滤器要写在Vue实例前面
 Vue.filter('formatDate', function (str) {
     if (!str) return ''
     var date = new Date(str)
@@ -40,3 +33,11 @@ Vue.filter('formatDate', function (str) {
     }
   }
 )
+
+
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})
