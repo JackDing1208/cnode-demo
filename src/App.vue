@@ -1,17 +1,19 @@
 <template>
   <div id="app">
     <Top/>
-
+    <MainList/>
   </div>
 </template>
 
 <script>
   import Top from './components/Top'
+  import MainList from './components/MainList'
+
 
   export default {
     name: 'App',
     components: {
-      Top,
+      Top, MainList
     }
   }
 </script>
@@ -22,14 +24,16 @@
     padding: 0;
     box-sizing: border-box;
   }
-  html{
+
+  html {
     background: #e1e1e1;
   }
-  ol,ul{
+
+  ol, ul {
     list-style: none;
   }
 
-  a{
+  a {
     text-decoration: none;
   }
 
