@@ -1,23 +1,23 @@
 <template>
   <div id="app">
     <Top/>
-    <!--<MainList/>-->
-    <Article/>
+    <div class="main">
+      <router-view name="main"></router-view>
+
+    </div>
     <Footer/>
   </div>
 </template>
 
 <script>
   import Top from './components/Top'
-  import MainList from './components/MainList'
-  import Article from './components/Article'
-  import Footer from './components/Footer2'
+  import Footer from './components/Footer'
 
 
   export default {
     name: 'App',
     components: {
-      Top, MainList,Article,Footer
+      Top,Footer
     }
   }
 </script>

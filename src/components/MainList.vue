@@ -19,7 +19,9 @@
             <span class="tab" v-if="!value.top===true && value.tab==='ask'">问答</span>
             <span class="tab" v-if="!value.top===true && value.tab==='job'">招聘</span>
 
-            <span class="title">{{value.title}}</span>
+            <router-link :to="{name:'post',params:{id:value.id}}">
+              <span class="title">{{value.title}}</span>
+            </router-link>
           </div>
           <div class="right-wrapper">
             <span class="replyTime">{{value.last_reply_at|formatDate}}</span>
@@ -39,36 +41,33 @@
 
 <script>
   export default {
-    name: "Mainlist",
+    name: "MainList",
     data: function () {
       return {
         posts: [],
-        isLoading:true
+        isLoading: true
       }
     },
     methods: {
       getData() {
-        this.$axios.get('https://cnodejs.org/api/v1/topics/?limit=30&page=1')
+        this.$axios.get('https://cnodejs.org/api/v1/topics/?limit=40&page=1')
           .then((response) => {
               this.posts = response.data.data
-              this.isLoading=false
+              this.isLoading = false
             }
           )
       }
     },
     beforeMount: function () {
       this.getData()
-
     }
-
-
   }
 </script>
 
 
 <style scoped>
   .mainList {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 10px auto;
     background: #ffffff;
     padding: 10px;
@@ -150,13 +149,14 @@
     cursor: pointer;
   }
 
-  .loading{
+  .loading {
     width: 80px;
     height: 40px;
     margin: 0 auto;
-    margin-top:15px;
+    margin-top: 15px;
   }
-  .loading span{
+
+  .loading span {
     display: inline-block;
     width: 8px;
     height: 100%;
@@ -164,27 +164,32 @@
     background: lightgreen;
     -webkit-animation: load 1s ease infinite;
   }
-  @-webkit-keyframes load{
-    0%,100%{
+
+  @-webkit-keyframes load {
+    0%, 100% {
       height: 40px;
       background: lightgreen;
     }
-    50%{
+    50% {
       height: 70px;
       margin: -15px 0;
       background: lightblue;
     }
   }
-  .loading span:nth-child(2){
-    -webkit-animation-delay:0.2s;
+
+  .loading span:nth-child(2) {
+    -webkit-animation-delay: 0.2s;
   }
-  .loading span:nth-child(3){
-    -webkit-animation-delay:0.4s;
+
+  .loading span:nth-child(3) {
+    -webkit-animation-delay: 0.4s;
   }
-  .loading span:nth-child(4){
-    -webkit-animation-delay:0.6s;
+
+  .loading span:nth-child(4) {
+    -webkit-animation-delay: 0.6s;
   }
-  .loading span:nth-child(5){
-    -webkit-animation-delay:0.8s;
+
+  .loading span:nth-child(5) {
+    -webkit-animation-delay: 0.8s;
   }
 </style>
