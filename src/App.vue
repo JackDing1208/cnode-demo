@@ -3,7 +3,6 @@
     <Top/>
     <div class="main">
       <router-view name="main"></router-view>
-
     </div>
     <Footer/>
   </div>
@@ -12,7 +11,6 @@
 <script>
   import Top from './components/Top'
   import Footer from './components/Footer'
-
 
   export default {
     name: 'App',

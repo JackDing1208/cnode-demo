@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="mainList">
+    <div class="loading" v-if="isLoading===true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="mainList" v-else>
       <nav>
         <span>全部</span>
         <span>精华</span>
@@ -29,13 +36,6 @@
         </li>
       </ol>
     </div>
-    <div class="loading" v-if="isLoading===true">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
   </div>
 </template>
 
@@ -48,6 +48,7 @@
         isLoading: true
       }
     },
+
     methods: {
       getData() {
         this.$axios.get('https://cnodejs.org/api/v1/topics/?limit=40&page=1')
@@ -152,8 +153,7 @@
   .loading {
     width: 80px;
     height: 40px;
-    margin: 0 auto;
-    margin-top: 15px;
+    margin: 400px auto;
   }
 
   .loading span {

@@ -21,7 +21,8 @@
 
   }
   .content{
-    max-width: 1200px;
+    max-width: 1400px;
+    text-align: center;
     margin:0 auto;
     font-size: 14px;
     line-height: 30px;

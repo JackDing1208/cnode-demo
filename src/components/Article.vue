@@ -1,49 +1,58 @@
 <template>
-  <div class="loading" v-if="isLoading===true"></div>
-  <div class="article" v-else>
-    <div class="main-wrapper">
-      <div class="main">
-        <div class="title-wrapper">
-          <span class="tab" v-if="post.good===true">精华</span>
-          <span class="tab" v-if="post.top===true">置顶</span>
-          <span class="title">{{post.title}}</span>
-        </div>
-        <ul>
-          <span>•</span>
-          <li> 发布于{{post.create_at|formatDate}}</li>
-          <span>•</span>
-          <li> 作者 {{post.author.loginname}}</li>
-          <span>•</span>
-          <li>{{post.visit_count}}次浏览</li>
-          <span>•</span>
-          <li> 来自 分享</li>
-        </ul>
-
-        <div class="content" id="content" v-html="post.content"></div>
-
-      </div>
-      <div class="reply">
-        <p>{{reply.length}}回复</p>
-        <ol>
-          <li v-for="(value,index) in reply">
-            <img :src="value.author.avatar_url" alt="avatar">
-            <div class="reply-wrapper">
-              <div class="replyInfo">
-                <span>{{value.author.loginname}}</span>
-                <span>{{index+1}}楼</span>
-                <span>{{value.create_at|formatDate}}</span>
-                <span>☝{{value.ups.length}}</span>
-              </div>
-              <div class="replyContent" v-html="value.content"></div>
-            </div>
-          </li>
-        </ol>
-
-      </div>
+  <div>
+    <div class="loading" v-if="isLoading===true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
+    <div class="article" v-else>
+      <div class="main-wrapper">
+        <div class="paper">
+          <div class="title-wrapper">
+            <span class="tab" v-if="post.good===true">精华</span>
+            <span class="tab" v-if="post.top===true">置顶</span>
+            <span class="title">{{post.title}}</span>
+          </div>
+          <ul>
+            <span>•</span>
+            <li> 发布于{{post.create_at|formatDate}}</li>
+            <span>•</span>
+            <li> 作者 {{post.author.loginname}}</li>
+            <span>•</span>
+            <li>{{post.visit_count}}次浏览</li>
+            <span>•</span>
+            <li> 来自 分享</li>
+          </ul>
 
-    <div class="aside"></div>
+          <div class="content" id="content" v-html="post.content"></div>
+
+        </div>
+        <div class="reply">
+          <p>{{reply.length}}回复</p>
+          <ol>
+            <li v-for="(value,index) in reply">
+              <img :src="value.author.avatar_url" alt="avatar">
+              <div class="reply-wrapper">
+                <div class="replyInfo">
+                  <span>{{value.author.loginname}}</span>
+                  <span>{{index+1}}楼</span>
+                  <span>{{value.create_at|formatDate}}</span>
+                  <span>☝{{value.ups.length}}</span>
+                </div>
+                <div class="replyContent" v-html="value.content"></div>
+              </div>
+            </li>
+          </ol>
+
+        </div>
+      </div>
+
+
+      <div class="aside"></div>
+    </div>
   </div>
 </template>
 
@@ -84,10 +93,13 @@
   .article {
     max-width: 1400px;
     display: flex;
+    justify-content: space-between;
     margin: 15px auto;
   }
-
-  .article .main {
+  .article .main-wrapper{
+    flex: 1;
+  }
+  .article .paper {
     max-width: 1100px;
     background: #ffffff;
 
