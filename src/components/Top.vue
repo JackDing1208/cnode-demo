@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <div class="header-wrapper">
-      <img src="https://static2.cnodejs.org/public/images/cnodejs_light.svg" alt="logo">
+      <router-link :to="{name:'root'}">
+        <img src="https://static2.cnodejs.org/public/images/cnodejs_light.svg" alt="logo">
+      </router-link>
       <ul>
         <li><a href="#">首页</a></li>
         <li><a href="#">新手入门</a></li>
@@ -17,8 +19,8 @@
 <script>
   export default {
     name: "top",
-    methods:{
-      alert(){
+    methods: {
+      alert() {
         alert("暂不支持注册和登录功能")
       }
     }
@@ -52,10 +54,12 @@
     color: #cccccc;
     font-size: 13px;
   }
+
   .header ul li:hover {
     color: #ffffff
 
   }
+
   a {
     font-size: 13px;
     color: #cccccc

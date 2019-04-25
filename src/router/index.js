@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MainList from '../components/MainList'
 import Article from "../components/Article";
-import Footer from "../components/Footer";
+import UserInfo from "../components/UserInfo";
 
 
 Vue.use(Router)
@@ -26,7 +26,9 @@ export default new Router({
     },
     {
       name:'user',
-      path: '/user',
-      components: Article
+      path: '/user/:name',
+      components: {
+        main:UserInfo
+      }
     }]
 })

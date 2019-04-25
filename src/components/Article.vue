@@ -31,16 +31,19 @@
 
         </div>
         <div class="reply">
-          <p>{{reply.length}}回复</p>
+          <div class="num">{{reply.length}}回复</div>
           <ol>
             <li v-for="(value,index) in reply">
-              <img :src="value.author.avatar_url" alt="avatar">
+              <router-link :to="{name:'user',params: {name:value.author.loginname}            }">
+                <img :src="value.author.avatar_url" alt="avatar">
+              </router-link>
+
               <div class="reply-wrapper">
                 <div class="replyInfo">
-                  <span>{{value.author.loginname}}</span>
-                  <span>{{index+1}}楼</span>
-                  <span>{{value.create_at|formatDate}}</span>
-                  <span>☝{{value.ups.length}}</span>
+                  <span class="name">{{value.author.loginname}}</span>
+                  <span class="floor">{{index+1}}楼</span>
+                  <span class="replyTime">{{value.create_at|formatDate}}</span>
+                  <span class="likes" v-if="!value.ups.length===0">☝{{value.ups.length}}</span>
                 </div>
                 <div class="replyContent" v-html="value.content"></div>
               </div>
@@ -79,7 +82,7 @@
       }
     },
     beforeMount() {
-      this.articleId=this.$route.params.id
+      this.articleId = this.$route.params.id
       console.log(this.articleId);
       this.getArticle()
     }
@@ -94,11 +97,13 @@
     max-width: 1400px;
     display: flex;
     justify-content: space-between;
-    margin: 15px auto;
+    margin: 10px auto;
   }
-  .article .main-wrapper{
+
+  .article .main-wrapper {
     flex: 1;
   }
+
   .article .paper {
     max-width: 1100px;
     background: #ffffff;
@@ -156,10 +161,28 @@
     border-top: 1px solid #e5e5e5;
     padding: 20px;
   }
-  .reply>p{
-    margin: 10px;
+
+  .reply  .num {
+    font-size: 14px;
+    padding: 10px;
   }
-  .reply li{
+  .reply  .name {
+    font-size: 14px;
+    color: #666666;
+  }
+  .reply  .floor {
+    color:#0088cc;
+    font-size: 14px;
+
+  }
+
+  .reply .replyTime{
+    font-size: 14px;
+
+    color:#0088cc
+  }
+
+  .reply li {
     display: flex;
     margin: 10px;
   }
@@ -169,7 +192,8 @@
     width: 32px;
     border-radius: 4px;
   }
-  .reply .reply-wrapper{
+
+  .reply .reply-wrapper {
     margin-left: 10px;
   }
 

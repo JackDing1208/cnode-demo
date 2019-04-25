@@ -9,22 +9,24 @@
     </div>
     <div class="mainList" v-else>
       <nav>
-        <span>全部</span>
-        <span>精华</span>
-        <span>分享</span>
-        <span>问答</span>
-        <span>招聘</span>
+        <span :class="{active:isActive==='all'}" @click="getData">全部</span>
+        <span :class="{active:isActive==='good'}" @click="getType('good')">精华</span>
+        <span :class="{active:isActive==='share'}" @click="getType('share')">分享</span>
+        <span :class="{active:isActive==='ask'}" @click="getType('ask')">问答</span>
+        <span :class="{active:isActive==='job'}" @click="getType('job')">招聘</span>
       </nav>
       <ol>
         <li v-for="value in posts">
           <div class="left-wrapper">
-            <img :src="value.author.avatar_url" alt="avatar">
+            <router-link :to="{name:'user',params: {name:value.author.loginname}}">
+              <img :src="value.author.avatar_url" alt="avatar">
+            </router-link>
             <span class="count">{{value.reply_count}}/<span class="visit">{{value.visit_count}}</span>  </span>
             <span class="tab top" v-if="value.top===true">置顶</span>
-            <span class="tab" v-if="!value.top===true && value.good===true">精华</span>
-            <span class="tab" v-if="!value.top===true && value.tab==='share'">分享</span>
-            <span class="tab" v-if="!value.top===true && value.tab==='ask'">问答</span>
-            <span class="tab" v-if="!value.top===true && value.tab==='job'">招聘</span>
+            <span class="tab good" v-if="!value.top===true &&  value.good===true">精华</span>
+            <span class="tab" v-if="!value.top===true && !value.good===true && value.tab==='share'">分享</span>
+            <span class="tab" v-if="!value.top===true && !value.good===true && value.tab==='ask'">问答</span>
+            <span class="tab" v-if="!value.top===true && !value.good===true && value.tab==='job'">招聘</span>
 
             <router-link :to="{name:'post',params:{id:value.id}}">
               <span class="title">{{value.title}}</span>
@@ -45,19 +47,33 @@
     data: function () {
       return {
         posts: [],
-        isLoading: true
+        isLoading: true,
+        type: '',
+        isActive:'',
       }
     },
 
     methods: {
       getData() {
+        this.isActive='all'
         this.$axios.get('https://cnodejs.org/api/v1/topics/?limit=40&page=1')
           .then((response) => {
               this.posts = response.data.data
               this.isLoading = false
             }
           )
+      },
+
+      getType(value) {
+        this.isActive=value
+        this.$axios.get(`https://cnodejs.org/api/v1/topics/?limit=40&page=1&tab=${value}`)
+          .then((response) => {
+              this.posts = response.data.data
+              this.isLoading = false
+            }
+          )
       }
+
     },
     beforeMount: function () {
       this.getData()
@@ -76,9 +92,22 @@
   }
 
   nav span {
+    display: inline-block;
     font-size: 14px;
+    line-height: 25px;
     color: #80bd01;
     padding: 0 5px;
+    margin: 0 5px;
+  }
+
+  nav span:hover {
+    cursor: pointer;
+    color:#005580;
+  }
+  nav span.active{
+    background: #80bd01;
+    color: #fff;
+    border-radius: 3px;
   }
 
   li {
@@ -122,12 +151,15 @@
     text-align: center;
   }
 
+
   .tab.top {
     background: #80bd01;
     color: #ffffff;
-
   }
-
+  .tab.good {
+    background: #80bd01;
+    color: #ffffff;
+  }
 
   .visit {
     color: #b4b4b4;
