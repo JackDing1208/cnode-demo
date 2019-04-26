@@ -85,6 +85,7 @@
   .pageButtons {
     display: flex;
     justify-content: center;
+    align-items: center;
     max-width: 600px;
     margin: 10px auto;
   }
@@ -93,6 +94,7 @@
   }
   .first,.last,.pre,.next{
     padding:0 10px ;
+    height: 30px;
   }
 
   .page {

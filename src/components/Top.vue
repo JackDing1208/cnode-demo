@@ -29,6 +29,7 @@
 
 <style scoped>
   .header {
+    width: 100%;
     background: #444444;
   }
 

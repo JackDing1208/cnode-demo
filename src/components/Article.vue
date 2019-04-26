@@ -72,6 +72,8 @@
             src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt=""></a>
           <a target="_blank" href="https://coding.net/?utm_source=cnodejs&utm_medium=banner&utm_campaign=march2019"><img
             src="//static.cnodejs.org/Ft7Ekzy3Dd-_aDGcmoEgct5uTnVZ" alt=""></a>
+          <a target="_blank" href="https://mp.weixin.qq.com/s/4UzLULPUpOQnPo91xuJKJg"><img
+            src="//static.cnodejs.org/FvSQHGgGVh_tkomqIFQ0MDEH9wrg" alt=""></a>
         </div>
         <div class="ad">
           <img src="../assets/ad.jpg" alt="">
@@ -139,12 +141,11 @@
 
   .article .aside {
     width: 300px;
-    height: 800px;
     background: #ffffff;
     margin-left: 15px;
     display: flex;
     flex-direction: column;
-
+    max-height: 960px;
   }
 
   .aside .author {
@@ -177,7 +178,6 @@
 
   .aside .ad {
     border-top: 15px solid #e1e1e1;
-    flex: 1;
     overflow: hidden;
   }
 
@@ -190,7 +190,7 @@
     margin: 10px 10px 0px 10px;
   }
 
-  .aside .link a:nth-child(3) {
+  .aside .link a:last-child {
     margin-bottom: 10px;
   }
 
@@ -264,6 +264,9 @@
   .reply li {
     display: flex;
     margin: 10px;
+  }
+  .reply li:last-child {
+    margin-bottom: 0px;
   }
 
   .reply img {
