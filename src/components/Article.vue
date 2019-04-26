@@ -54,7 +54,29 @@
       </div>
 
 
-      <div class="aside"></div>
+      <div class="aside">
+        <div class="author">
+          <div class="title">本文作者</div>
+          <router-link :to="{name:'user',params: {name:post.author.loginname}            }">
+            <img :src="post.author.avatar_url" alt="avatar">
+          </router-link>
+          <div class="name">{{post.author.loginname}}</div>
+
+
+        </div>
+        <div class="link">
+          <a target="_blank" href="https://www.aliyun.com/product/nodejs?ref=cnode"><img
+            src="//static.cnodejs.org/FlajCCXkxZaOsuWp3k0iaiqfrJaS" alt=""></a>
+          <a target="_blank"
+             href="https://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&utm_medium=content_pic_pc_540_130&utm_campaign=huodong&utm_content=gift&ytag=cnodejs"><img
+            src="//static.cnodejs.org/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt=""></a>
+          <a target="_blank" href="https://coding.net/?utm_source=cnodejs&utm_medium=banner&utm_campaign=march2019"><img
+            src="//static.cnodejs.org/Ft7Ekzy3Dd-_aDGcmoEgct5uTnVZ" alt=""></a>
+        </div>
+        <div class="ad">
+          <img src="../assets/ad.jpg" alt="">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +97,7 @@
         this.$axios.get(`https://cnodejs.org/api/v1/topic/${this.articleId}`)
           .then((response) => {
             this.post = response.data.data
+            console.log(this.post);
             this.reply = this.post.replies
             this.isLoading = false
           })
@@ -95,7 +118,7 @@
     max-width: 1400px;
     display: flex;
     justify-content: space-between;
-    margin: 10px auto;
+    margin: 15px auto;
   }
 
   .article .main-wrapper {
@@ -117,8 +140,64 @@
   .article .aside {
     width: 300px;
     height: 800px;
-    background: #444444;
+    background: #ffffff;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+
   }
+
+  .aside .author {
+    padding: 10px;
+  }
+
+  .aside .author .title {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px;
+  }
+
+  .aside .author .name {
+    text-align: center;
+    font-size: 16px ;
+    color: #0088cc;
+  }
+
+  .aside .author img {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    margin: 10px auto ;
+  }
+
+  .aside .link {
+    border-top: 15px solid #e1e1e1;
+  }
+
+  .aside .ad {
+    border-top: 15px solid #e1e1e1;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .aside .link a {
+    display: inline-block;
+  }
+
+  .aside .link img {
+    max-width: 280px;
+    margin: 10px 10px 0px 10px;
+  }
+
+  .aside .link a:nth-child(3) {
+    margin-bottom: 10px;
+  }
+
+  .aside .ad img {
+    max-width: 300px;
+  }
+
 
   .article .title-wrapper {
     height: 50px;
@@ -160,24 +239,26 @@
     padding: 20px;
   }
 
-  .reply  .num {
+  .reply .num {
     font-size: 14px;
     padding: 10px;
   }
-  .reply  .name {
+
+  .reply .name {
     font-size: 14px;
     color: #666666;
   }
-  .reply  .floor {
+
+  .reply .floor {
     color: #333;
     font-size: 14px;
 
   }
 
-  .reply .replyTime{
+  .reply .replyTime {
     font-size: 14px;
 
-    color:#0088cc
+    color: #0088cc
   }
 
   .reply li {
@@ -190,7 +271,8 @@
     width: 32px;
     border-radius: 4px;
   }
-  .reply .replyContent{
+
+  .reply .replyContent {
     max-width: 1000px;
     overflow: hidden;
     font-size: 15px;
@@ -198,6 +280,7 @@
     white-space: normal;
     text-overflow: ellipsis;
   }
+
   .reply .reply-wrapper {
     margin-left: 10px;
   }
