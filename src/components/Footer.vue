@@ -18,7 +18,6 @@
   .footer{
     background: #ffffff;
     color: #ababab;
-
   }
   .content{
     max-width: 1400px;

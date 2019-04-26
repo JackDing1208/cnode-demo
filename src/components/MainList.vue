@@ -19,7 +19,7 @@
         <li v-for="value in posts">
           <div class="left-wrapper">
             <router-link :to="{name:'user',params: {name:value.author.loginname}}">
-              <img :src="value.author.avatar_url" alt="avatar">
+              <img @error="defaultAvatar"  :src="value.author.avatar_url" alt="">
             </router-link>
             <span class="count">{{value.reply_count}}/<span class="visit">{{value.visit_count}}</span>  </span>
             <span class="tab top" v-if="value.top===true">置顶</span>
@@ -63,7 +63,6 @@
             }
           )
       },
-
       getType(value) {
         this.isActive=value
         this.$axios.get(`https://cnodejs.org/api/v1/topics/?limit=40&page=1&tab=${value}`)
@@ -72,9 +71,12 @@
               this.isLoading = false
             }
           )
-      }
+      },
+      defaultAvatar(){
 
+      },
     },
+
     beforeMount: function () {
       this.getData()
     }

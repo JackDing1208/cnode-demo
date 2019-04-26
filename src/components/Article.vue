@@ -77,13 +77,11 @@
             this.post = response.data.data
             this.reply = this.post.replies
             this.isLoading = false
-            console.log(this.reply);
           })
       }
     },
     beforeMount() {
       this.articleId = this.$route.params.id
-      console.log(this.articleId);
       this.getArticle()
     }
   }
@@ -171,7 +169,7 @@
     color: #666666;
   }
   .reply  .floor {
-    color:#0088cc;
+    color: #333;
     font-size: 14px;
 
   }
@@ -192,7 +190,14 @@
     width: 32px;
     border-radius: 4px;
   }
-
+  .reply .replyContent{
+    max-width: 1000px;
+    overflow: hidden;
+    font-size: 15px;
+    margin-bottom: 15px;
+    white-space: normal;
+    text-overflow: ellipsis;
+  }
   .reply .reply-wrapper {
     margin-left: 10px;
   }
