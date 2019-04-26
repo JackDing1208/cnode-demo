@@ -37,11 +37,13 @@
           </div>
         </li>
       </ol>
+        <Pagination @pagechange="getPage"></Pagination>
     </div>
   </div>
 </template>
 
 <script>
+  import Pagination from './Pagination'
   export default {
     name: "MainList",
     data: function () {
@@ -50,13 +52,14 @@
         isLoading: true,
         type: '',
         isActive:'',
+        currentPage:'1'
       }
     },
 
     methods: {
       getData() {
         this.isActive='all'
-        this.$axios.get('https://cnodejs.org/api/v1/topics/?limit=40&page=1')
+        this.$axios.get(`https://cnodejs.org/api/v1/topics/?limit=40&page=${this.currentPage}`)
           .then((response) => {
               this.posts = response.data.data
               this.isLoading = false
@@ -64,6 +67,7 @@
           )
       },
       getType(value) {
+        console.log(value);
         this.isActive=value
         this.$axios.get(`https://cnodejs.org/api/v1/topics/?limit=40&page=1&tab=${value}`)
           .then((response) => {
@@ -75,8 +79,14 @@
       defaultAvatar(){
 
       },
+      getPage(page){
+        this.currentPage=page
+        this.getData()
+      }
     },
-
+    components:{
+      Pagination
+    },
     beforeMount: function () {
       this.getData()
     }

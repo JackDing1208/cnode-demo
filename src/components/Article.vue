@@ -30,7 +30,7 @@
           <div class="content" id="content" v-html="post.content"></div>
 
         </div>
-        <div class="reply">
+        <div class="reply" v-if="reply.length!==0">
           <div class="num">{{reply.length}}回复</div>
           <ol>
             <li v-for="(value,index) in reply">
@@ -43,7 +43,7 @@
                   <span class="name">{{value.author.loginname}}</span>
                   <span class="floor">{{index+1}}楼</span>
                   <span class="replyTime">{{value.create_at|formatDate}}</span>
-                  <span class="likes" v-if="!value.ups.length===0">☝{{value.ups.length}}</span>
+                  <span class="likes" v-if="value.ups.length!==0">☝{{value.ups.length}}</span>
                 </div>
                 <div class="replyContent" v-html="value.content"></div>
               </div>
